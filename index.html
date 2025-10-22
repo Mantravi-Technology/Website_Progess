@@ -1,1239 +1,395 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mantravi | Coming soon!</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Mantravi — Launching Soon</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700;900&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --primary: #00b4d8;
-      --primary-dark: #0096c7;
-      --dark: #050a30;
-      --dark-light: #0a1a4a;
-      --light: #ffffff;
-      --gray: rgba(255, 255, 255, 0.7);
-      --gray-dark: rgba(255, 255, 255, 0.4);
+    :root{
+      /* company colors preserved */
+      --primary: #00b4d8;       /* main brand color */
+      --primary-2: #0096c7;    /* accent / darker */
+      --bg: #050a30;           /* deep navy background */
+      --muted: rgba(255,255,255,0.85);
+      --glass: rgba(255,255,255,0.04);
+      --radius: 16px;
     }
-    
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+
+    /* Reset & base */
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{
+      font-family:'Poppins',system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      background: linear-gradient(180deg,var(--bg), #071038 60%);
+      color:var(--muted);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:32px;
+      line-height:1.3;
     }
-    
-    html {
-      scroll-behavior: smooth;
+
+    /* Container */
+    .wrap{
+      width:100%;
+      max-width:980px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:20px;
+      padding:44px;
+      box-shadow: 0 10px 40px rgba(2,6,23,0.7);
+      border: 1px solid rgba(0,0,0,0.35);
+      position:relative;
+      overflow:hidden;
     }
-    
-    body {
-      background: linear-gradient(135deg, var(--dark), var(--dark-light));
-      color: var(--light);
-      font-family: "Poppins", sans-serif;
-      line-height: 1.6;
-      overflow-x: hidden;
+
+    /* Subtle branded backdrop shape */
+    .wrap::before{
+      content:"";
+      position:absolute;
+      right:-120px;
+      top:-120px;
+      width:420px;
+      height:420px;
+      background: radial-gradient(circle at 30% 30%, rgba(0,180,216,0.14), transparent 20%),
+                  conic-gradient(from 160deg at 50% 50%, rgba(0,180,216,0.06), transparent 30%);
+      transform: rotate(15deg);
+      filter: blur(22px);
+      pointer-events:none;
+      z-index:0;
     }
-    
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px;
+
+    /* Top area with tiny mark */
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      z-index:1;
+      margin-bottom:28px;
     }
-    
-    /* Header & Navigation */
-    header {
-      padding: 20px 0;
-      position: fixed;
-      width: 100%;
-      top: 0;
-      z-index: 1000;
-      background: rgba(5, 10, 48, 0.95);
-      backdrop-filter: blur(10px);
-      transition: all 0.3s ease;
+    .mark{
+      width:54px;height:54px;border-radius:12px;
+      background:linear-gradient(135deg,var(--primary),var(--primary-2));
+      display:grid;place-items:center;
+      box-shadow:0 8px 30px rgba(0,180,216,0.12);
+      flex-shrink:0;
+      font-weight:900;color:#021124;font-size:20px;
     }
-    
-    header.scrolled {
-      padding: 15px 0;
-      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    .brand h1{font-size:20px;letter-spacing:0.6px;font-weight:700;color:var(--muted)}
+    .brand p{font-size:13px;color:rgba(255,255,255,0.65);margin-top:4px}
+
+    /* Main headline + tagline */
+    .hero{
+      display:flex;
+      gap:28px;
+      align-items:center;
+      z-index:1;
     }
-    
-    .header-container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+    .left{
+      flex:1;
+      min-width:0;
     }
-    
-    .logo {
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: var(--light);
-      text-decoration: none;
-      display: flex;
-      align-items: center;
+
+    .headline{
+      font-size: clamp(22px, 4.2vw, 36px);
+      font-weight:800;
+      color: white;
+      margin-bottom:12px;
+      line-height:1.02;
+      letter-spacing:-0.6px;
     }
-    
-    .logo img {
-      width: 40px;
-      margin-right: 10px;
+
+    .tagline{
+      font-size:16px;
+      color: rgba(255,255,255,0.88);
+      margin-bottom:22px;
     }
-    
-    .nav-menu {
-      display: flex;
-      list-style: none;
+
+    /* Creative micro copy */
+    .micro{
+      color: rgba(255,255,255,0.6);
+      font-size:13px;
+      margin-bottom:22px;
     }
-    
-    .nav-menu li {
-      margin-left: 30px;
+
+    /* Unique loader (SVG + CSS) */
+    .loader-wrap{
+      display:flex;
+      align-items:center;
+      gap:18px;
     }
-    
-    .nav-menu a {
-      color: var(--light);
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.3s ease;
-      position: relative;
-    }
-    
-    .nav-menu a:hover {
-      color: var(--primary);
-    }
-    
-    .nav-menu a::after {
-      content: '';
-      position: absolute;
-      width: 0;
-      height: 2px;
-      bottom: -5px;
-      left: 0;
-      background-color: var(--primary);
-      transition: width 0.3s ease;
-    }
-    
-    .nav-menu a:hover::after {
-      width: 100%;
-    }
-    
-    .hamburger {
-      display: none;
-      cursor: pointer;
-      font-size: 1.5rem;
-    }
-    
-    /* Hero Section */
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 0 20px;
-      position: relative;
-    }
-    
-    .hero img {
-      width: 300px;
-      margin-bottom: 15px;
-    }
-    
-    .hero h1 {
-      font-size: 2.5rem;
-      margin-bottom: 10px;
-    }
-    
-    .hero p {
-      font-size: 1.1rem;
-      max-width: 500px;
-      margin-bottom: 30px;
-      color: var(--gray);
-    }
-    
+
     .loader {
-      margin: 30px 0;
-      width: 60px;
-      height: 60px;
-      border: 6px solid rgba(255, 255, 255, 0.2);
-      border-top: 6px solid var(--primary);
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-    }
-    
-    @keyframes spin {
-      to {
-        transform: rotate(360deg);
-      }
-    }
-    
-    /* About Section */
-    .about {
-      padding: 100px 0;
-      background: rgba(5, 10, 48, 0.7);
-    }
-    
-    .section-title {
-      text-align: center;
-      margin-bottom: 50px;
-      font-size: 2rem;
-    }
-    
-    .section-title::after {
-      content: '';
-      display: block;
-      width: 80px;
-      height: 3px;
-      background: var(--primary);
-      margin: 15px auto;
-    }
-    
-    .about-content {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 40px;
-      align-items: center;
-      justify-content: center;
-    }
-    
-    .about-text {
-      flex: 1;
-      min-width: 300px;
-      max-width: 600px;
-    }
-    
-    .about-text p {
-      margin-bottom: 20px;
-      color: var(--gray);
-    }
-    
-    .about-image {
-      flex: 1;
-      min-width: 300px;
-      max-width: 500px;
-      height: 300px;
-      background: linear-gradient(45deg, var(--primary), var(--primary-dark));
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 5rem;
-      color: white;
-      box-shadow: 0 10px 30px rgba(0, 180, 216, 0.3);
-    }
-    
-    /* Features Section */
-    .features {
-      padding: 100px 0;
-    }
-    
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 30px;
-    }
-    
-    .feature-card {
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 10px;
-      padding: 30px;
-      text-align: center;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    
-    .feature-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-    }
-    
-    .feature-icon {
-      font-size: 2.5rem;
-      color: var(--primary);
-      margin-bottom: 20px;
-    }
-    
-    .feature-card h3 {
-      margin-bottom: 15px;
-      font-size: 1.3rem;
-    }
-    
-    .feature-card p {
-      color: var(--gray);
-    }
-    
-    /* Team Section */
-    .team {
-      padding: 100px 0;
-      background: rgba(5, 10, 48, 0.7);
-    }
-    
-    .team-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 30px;
-    }
-    
-    .team-member {
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 10px;
-      overflow: hidden;
-      text-align: center;
-      transition: transform 0.3s ease;
-    }
-    
-    .team-member:hover {
-      transform: translateY(-10px);
-    }
-    
-    .member-img {
-      height: 200px;
-      background: var(--dark-light);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 4rem;
-      color: var(--primary);
-    }
-    
-    .member-info {
-      padding: 20px;
-    }
-    
-    .member-info h3 {
-      margin-bottom: 5px;
-    }
-    
-    .member-info p {
-      color: var(--primary);
-      font-weight: 500;
-      margin-bottom: 10px;
-    }
-    
-    .member-info .bio {
-      color: var(--gray);
-      font-size: 0.9rem;
-    }
-    
-    /* Countdown Section */
-    .countdown {
-      padding: 100px 0;
-      text-align: center;
-    }
-    
-    .countdown-title {
-      margin-bottom: 40px;
-    }
-    
-    .countdown-container {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-    
-    .countdown-item {
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 10px;
-      padding: 20px;
-      min-width: 100px;
-      transition: transform 0.3s ease;
-    }
-    
-    .countdown-item:hover {
-      transform: scale(1.05);
-    }
-    
-    .countdown-number {
-      font-size: 2.5rem;
-      font-weight: 700;
-      color: var(--primary);
-    }
-    
-    .countdown-label {
-      font-size: 0.9rem;
-      color: var(--gray);
-      margin-top: 5px;
-    }
-    
-    /* Progress Section */
-    .progress {
-      padding: 100px 0;
-      background: rgba(5, 10, 48, 0.7);
-    }
-    
-    .progress-bars {
-      max-width: 800px;
-      margin: 0 auto;
-    }
-    
-    .progress-item {
-      margin-bottom: 30px;
-    }
-    
-    .progress-info {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 10px;
-    }
-    
-    .progress-bar {
-      height: 10px;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 5px;
-      overflow: hidden;
-    }
-    
-    .progress-fill {
-      height: 100%;
-      background: var(--primary);
-      border-radius: 5px;
-      width: 0;
-      transition: width 1.5s ease;
-    }
-    
-    /* Newsletter Section */
-    .newsletter {
-      padding: 100px 0;
-      text-align: center;
-    }
-    
-    .newsletter-form {
-      max-width: 500px;
-      margin: 0 auto;
-      display: flex;
-      gap: 10px;
-    }
-    
-    .newsletter-input {
-      flex: 1;
-      padding: 15px;
-      border: none;
-      border-radius: 5px;
-      background: rgba(255, 255, 255, 0.1);
-      color: var(--light);
-      font-family: "Poppins", sans-serif;
-    }
-    
-    .newsletter-input::placeholder {
-      color: var(--gray);
-    }
-    
-    .newsletter-btn {
-      padding: 15px 30px;
-      background: var(--primary);
-      color: var(--light);
-      border: none;
-      border-radius: 5px;
-      font-family: "Poppins", sans-serif;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
-    
-    .newsletter-btn:hover {
-      background: var(--primary-dark);
-    }
-    
-    /* FAQ Section */
-    .faq {
-      padding: 100px 0;
-      background: rgba(5, 10, 48, 0.7);
-    }
-    
-    .faq-container {
-      max-width: 800px;
-      margin: 0 auto;
-    }
-    
-    .faq-item {
-      margin-bottom: 20px;
-      border-radius: 10px;
-      overflow: hidden;
-      background: rgba(255, 255, 255, 0.05);
-    }
-    
-    .faq-question {
-      padding: 20px;
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-weight: 500;
-    }
-    
-    .faq-answer {
-      padding: 0 20px;
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.3s ease, padding 0.3s ease;
-      color: var(--gray);
-    }
-    
-    .faq-item.active .faq-answer {
-      padding: 0 20px 20px;
-      max-height: 200px;
-    }
-    
-    .faq-toggle {
-      transition: transform 0.3s ease;
-    }
-    
-    .faq-item.active .faq-toggle {
-      transform: rotate(180deg);
-    }
-    
-    /* Contact Section */
-    .contact {
-      padding: 100px 0;
-    }
-    
-    .contact-container {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 40px;
-    }
-    
-    .contact-info {
-      flex: 1;
-      min-width: 300px;
-    }
-    
-    .contact-info h3 {
-      margin-bottom: 20px;
-    }
-    
-    .contact-details {
-      margin-bottom: 30px;
-    }
-    
-    .contact-detail {
-      display: flex;
-      align-items: center;
-      margin-bottom: 15px;
-    }
-    
-    .contact-detail i {
-      margin-right: 15px;
-      color: var(--primary);
-      font-size: 1.2rem;
-      width: 20px;
-    }
-    
-    .contact-form {
-      flex: 1;
-      min-width: 300px;
-    }
-    
-    .form-group {
-      margin-bottom: 20px;
-    }
-    
-    .form-input {
-      width: 100%;
-      padding: 15px;
-      border: none;
-      border-radius: 5px;
-      background: rgba(255, 255, 255, 0.1);
-      color: var(--light);
-      font-family: "Poppins", sans-serif;
-    }
-    
-    .form-input::placeholder {
-      color: var(--gray);
-    }
-    
-    textarea.form-input {
-      min-height: 150px;
-      resize: vertical;
-    }
-    
-    .submit-btn {
-      padding: 15px 30px;
-      background: var(--primary);
-      color: var(--light);
-      border: none;
-      border-radius: 5px;
-      font-family: "Poppins", sans-serif;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
-    
-    .submit-btn:hover {
-      background: var(--primary-dark);
-    }
-    
-    /* Footer */
-    footer {
-      padding: 60px 0 30px;
-      text-align: center;
-      background: rgba(0, 0, 0, 0.2);
-    }
-    
-    .footer-content {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      margin-bottom: 40px;
-      text-align: left;
-    }
-    
-    .footer-column {
-      flex: 1;
-      min-width: 200px;
-      margin-bottom: 30px;
-    }
-    
-    .footer-column h3 {
-      margin-bottom: 20px;
-      font-size: 1.2rem;
-    }
-    
-    .footer-links {
-      list-style: none;
-    }
-    
-    .footer-links li {
-      margin-bottom: 10px;
-    }
-    
-    .footer-links a {
-      color: var(--gray);
-      text-decoration: none;
-      transition: color 0.3s ease;
-    }
-    
-    .footer-links a:hover {
-      color: var(--primary);
-    }
-    
-    .social-links {
-      display: flex;
-      gap: 15px;
-      margin-top: 20px;
-    }
-    
-    .social-link {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 40px;
-      height: 40px;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 50%;
-      color: var(--light);
-      text-decoration: none;
-      transition: all 0.3s ease;
-    }
-    
-    .social-link:hover {
-      background: var(--primary);
-      transform: translateY(-5px);
-    }
-    
-    .copyright {
-      padding-top: 30px;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-      color: var(--gray);
-      font-size: 0.9rem;
-    }
-    
-    /* Back to Top Button */
-    .back-to-top {
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      width: 50px;
-      height: 50px;
-      background: var(--primary);
-      color: white;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-decoration: none;
-      opacity: 0;
-      visibility: hidden;
-      transition: all 0.3s ease;
-      z-index: 99;
-    }
-    
-    .back-to-top.visible {
-      opacity: 1;
-      visibility: visible;
-    }
-    
-    .back-to-top:hover {
-      background: var(--primary-dark);
-      transform: translateY(-5px);
-    }
-    
-    /* Responsive */
-    @media (max-width: 768px) {
-      .hamburger {
-        display: block;
-      }
-      
-      .nav-menu {
-        position: fixed;
-        top: 70px;
-        right: -100%;
-        flex-direction: column;
-        background: var(--dark);
-        width: 100%;
-        text-align: center;
-        transition: 0.3s;
-        box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
-        padding: 20px 0;
-      }
-      
-      .nav-menu.active {
-        right: 0;
-      }
-      
-      .nav-menu li {
-        margin: 15px 0;
-      }
-      
-      .hero h1 {
-        font-size: 2rem;
-      }
-      
-      .newsletter-form {
-        flex-direction: column;
-      }
-      
-      .about-content {
-        flex-direction: column;
-      }
-      
-      .footer-content {
-        flex-direction: column;
-      }
+      width:92px;height:92px;border-radius:20px;
+      display:grid;place-items:center;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border:1px solid rgba(255,255,255,0.04);
+      box-shadow: 0 8px 26px rgba(2,6,23,0.6);
+      position:relative;
+      overflow:visible;
+    }
+
+    /* Animated orb inside loader */
+    .orb {
+      width:54px;height:54px;border-radius:50%;
+      background: radial-gradient(circle at 30% 30%, #eaffff, rgba(255,255,255,0.06));
+      box-shadow: 0 10px 32px rgba(0,180,216,0.18), inset 0 -8px 18px rgba(0,0,0,0.18);
+      transform-origin:center;
+      animation: floaty 2.6s ease-in-out infinite;
+      position:relative;
+    }
+
+    /* halo ring */
+    .orb::after{
+      content:"";
+      position:absolute;inset:-8px;border-radius:50%;
+      background: conic-gradient(from 120deg, rgba(0,180,216,0.22), rgba(0,150,199,0.12) 40%, transparent 60%);
+      filter: blur(8px);
+      opacity:0.9;
+    }
+
+    @keyframes floaty {
+      0%{ transform: translateY(0) scale(1);}
+      50%{ transform: translateY(-8px) scale(1.03) rotate(6deg);}
+      100%{ transform: translateY(0) scale(1);}
+    }
+
+    /* Fancy tick marks rotating */
+    .spinner-rings{
+      position:absolute; inset:6px; pointer-events:none;
+      display:grid;place-items:center;
+      transform-origin:center;
+      animation: spinR 8s linear infinite;
+      opacity:0.85;
+    }
+    @keyframes spinR {
+      to{ transform: rotate(360deg); }
+    }
+
+    /* Countdown box */
+    .countdown{
+      display:flex;
+      gap:12px;
+      align-items:center;
+      margin-top:8px;
+      flex-wrap:wrap;
+    }
+
+    .count-item{
+      min-width:86px;
+      background:var(--glass);
+      padding:12px 12px;
+      border-radius:12px;
+      text-align:center;
+      border: 1px solid rgba(255,255,255,0.03);
+      box-shadow: 0 6px 18px rgba(1,6,18,0.6);
+    }
+    .count-number{
+      font-weight:800;
+      font-size:20px;
+      color:var(--primary);
+      letter-spacing:0.6px;
+    }
+    .count-label{
+      font-size:12px;
+      color:rgba(255,255,255,0.7);
+      margin-top:6px;
+    }
+
+    /* CTA + small footer line */
+    .cta{
+      margin-top:26px;
+      display:flex;
+      gap:12px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+    .notify{
+      background:linear-gradient(90deg,var(--primary),var(--primary-2));
+      color:#021124;
+      padding:11px 18px;
+      border-radius:12px;
+      font-weight:700;
+      border:none;
+      cursor:pointer;
+      box-shadow:0 10px 30px rgba(0,180,216,0.12);
+    }
+    .muted-link{
+      color:rgba(255,255,255,0.7);
+      font-size:13px;
+      text-decoration:underline;
+      background:transparent;
+      border:none;
+      cursor:pointer;
+    }
+
+    .small{
+      margin-top:18px;
+      font-size:12px;
+      color:rgba(255,255,255,0.55);
+    }
+
+    /* Responsive tweaks */
+    @media (max-width:780px){
+      .wrap{padding:28px;border-radius:14px}
+      .hero{flex-direction:column;align-items:flex-start}
+      .loader{width:84px;height:84px}
     }
   </style>
 </head>
 <body>
-  <!-- Header & Navigation -->
-  <header id="header">
-    <div class="container header-container">
-      <a href="#" class="logo">
-        <img src="logo.png" alt="Mantravi Logo" />
-        Mantravi
-      </a>
-      
-      <div class="hamburger" id="hamburger">
-        <i class="fas fa-bars"></i>
+  <main class="wrap" role="main" aria-labelledby="pageTitle">
+    <header class="brand" aria-hidden="false">
+      <div class="mark" aria-hidden="true">M</div>
+      <div>
+        <h1 id="pageTitle">Mantravi</h1>
+        <p>Innovating Trust — Connecting Possibilities</p>
       </div>
-      
-      <ul class="nav-menu" id="nav-menu">
-        <li><a href="#home">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#features">Features</a></li>
-        <li><a href="#team">Team</a></li>
-        <li><a href="#progress">Progress</a></li>
-        <li><a href="#faq">FAQ</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </div>
-  </header>
+    </header>
 
-  <!-- Hero Section -->
-  <section class="hero" id="home">
-    <img src="logo.png" alt="Mantravi Logo" />
-    <h1>Innovating Trust, Connecting Possibilities</h1>
-    <h2>We're building something you'll love — stay tuned!</h2>
-    <p>Innovation loading… prepare to be inspired.</p>
-    
-    <div class="loader"></div>
-  </section>
+    <section class="hero" aria-labelledby="launchHeading" role="region">
+      <div class="left">
+        <h2 class="headline" id="launchHeading">
+          We're crafting the future. Get ready for something meaningful.
+        </h2>
 
-  <!-- About Section -->
-  <section class="about" id="about">
-    <div class="container">
-      <h2 class="section-title">About Mantravi</h2>
-      <div class="about-content">
-        <div class="about-text">
-          <p>Mantravi is a forward-thinking technology company dedicated to creating innovative solutions that bridge the gap between today's challenges and tomorrow's possibilities.</p>
-          <p>Our team of experts is working tirelessly to develop cutting-edge products that will revolutionize how businesses and individuals interact with technology.</p>
-          <p>We believe in the power of trust, innovation, and connection to transform industries and create meaningful impact.</p>
-        </div>
-        <div class="about-image">
-          <i class="fas fa-rocket"></i>
-        </div>
-      </div>
-    </div>
-  </section>
+        <p class="tagline">
+          A new chapter in smart, trustworthy technology — built with care, rigor, and delight.
+        </p>
 
-  <!-- Features Section -->
-  <section class="features" id="features">
-    <div class="container">
-      <h2 class="section-title">What to Expect</h2>
-      <div class="features-grid">
-        <div class="feature-card">
-          <div class="feature-icon">
-            <i class="fas fa-shield-alt"></i>
-          </div>
-          <h3>Enhanced Security</h3>
-          <p>State-of-the-art security protocols to protect your data and ensure complete privacy.</p>
-        </div>
-        
-        <div class="feature-card">
-          <div class="feature-icon">
-            <i class="fas fa-bolt"></i>
-          </div>
-          <h3>Lightning Fast</h3>
-          <p>Optimized performance that delivers results in record time without compromising quality.</p>
-        </div>
-        
-        <div class="feature-card">
-          <div class="feature-icon">
-            <i class="fas fa-users"></i>
-          </div>
-          <h3>User-Centric Design</h3>
-          <p>Intuitive interfaces designed with the end-user in mind for seamless experiences.</p>
-        </div>
-        
-        <div class="feature-card">
-          <div class="feature-icon">
-            <i class="fas fa-chart-line"></i>
-          </div>
-          <h3>Data Analytics</h3>
-          <p>Powerful insights and analytics to help you make informed decisions and drive growth.</p>
-        </div>
-        
-        <div class="feature-card">
-          <div class="feature-icon">
-            <i class="fas fa-mobile-alt"></i>
-          </div>
-          <h3>Cross-Platform</h3>
-          <p>Seamless experience across all your devices with our responsive design approach.</p>
-        </div>
-        
-        <div class="feature-card">
-          <div class="feature-icon">
-            <i class="fas fa-cogs"></i>
-          </div>
-          <h3>Customizable</h3>
-          <p>Tailor the platform to your specific needs with our flexible customization options.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+        <p class="micro">
+          Launching in: a focused 10-day sprint. Sign up to be among the first to experience it.
+        </p>
 
-  <!-- Team Section -->
-  <section class="team" id="team">
-    <div class="container">
-      <h2 class="section-title">Meet Our Team</h2>
-      <div class="team-grid">
-        <div class="team-member">
-          <div class="member-img">
-            <i class="fas fa-user"></i>
-          </div>
-          <div class="member-info">
-            <h3>Alex Johnson</h3>
-            <p>CEO & Founder</p>
-            <p class="bio">Visionary leader with 10+ years in tech innovation and business strategy.</p>
-          </div>
-        </div>
-        
-        <div class="team-member">
-          <div class="member-img">
-            <i class="fas fa-user"></i>
-          </div>
-          <div class="member-info">
-            <h3>Sarah Chen</h3>
-            <p>CTO</p>
-            <p class="bio">Technical expert specializing in scalable architecture and product development.</p>
-          </div>
-        </div>
-        
-        <div class="team-member">
-          <div class="member-img">
-            <i class="fas fa-user"></i>
-          </div>
-          <div class="member-info">
-            <h3>Michael Rodriguez</h3>
-            <p>Lead Designer</p>
-            <p class="bio">Creative mind focused on user experience and intuitive interface design.</p>
-          </div>
-        </div>
-        
-        <div class="team-member">
-          <div class="member-img">
-            <i class="fas fa-user"></i>
-          </div>
-          <div class="member-info">
-            <h3>Emily Watson</h3>
-            <p>Marketing Director</p>
-            <p class="bio">Strategist with a passion for building brands and connecting with audiences.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+        <div class="loader-wrap" aria-hidden="false">
+          <div class="loader" role="img" aria-label="Loading animation">
+            <div class="orb" id="orb"></div>
 
-  <!-- Countdown Section -->
-  <section class="countdown">
-    <div class="container">
-      <h2 class="section-title countdown-title">Launching Soon</h2>
-      <div class="countdown-container">
-        <div class="countdown-item">
-          <div class="countdown-number" id="days">00</div>
-          <div class="countdown-label">Days</div>
-        </div>
-        <div class="countdown-item">
-          <div class="countdown-number" id="hours">00</div>
-          <div class="countdown-label">Hours</div>
-        </div>
-        <div class="countdown-item">
-          <div class="countdown-number" id="minutes">00</div>
-          <div class="countdown-label">Minutes</div>
-        </div>
-        <div class="countdown-item">
-          <div class="countdown-number" id="seconds">00</div>
-          <div class="countdown-label">Seconds</div>
-        </div>
-      </div>
-    </div>
-  </section>
+            <!-- rotating decorative ring marks -->
+            <svg class="spinner-rings" width="200" height="200" viewBox="0 0 200 200" aria-hidden="true">
+              <g transform="translate(100,100)">
+                <g style="opacity:0.85">
+                  <path d="M80 0 A80 80 0 0 1 40 69" stroke="rgba(255,255,255,0.06)" stroke-width="6" fill="none" stroke-linecap="round"/>
+                  <path d="M-80 0 A80 80 0 0 0 -40 -69" stroke="rgba(0,180,216,0.18)" stroke-width="6" fill="none" stroke-linecap="round"/>
+                  <circle cx="64" cy="0" r="3.8" fill="rgba(0,180,216,0.95)"/>
+                  <circle cx="-64" cy="0" r="2.6" fill="rgba(255,255,255,0.6)"/>
+                </g>
+              </g>
+            </svg>
+          </div>
 
-  <!-- Progress Section -->
-  <section class="progress" id="progress">
-    <div class="container">
-      <h2 class="section-title">Development Progress</h2>
-      <div class="progress-bars">
-        <div class="progress-item">
-          <div class="progress-info">
-            <span>UI/UX Design</span>
-            <span>95%</span>
-          </div>
-          <div class="progress-bar">
-            <div class="progress-fill" data-width="95"></div>
-          </div>
-        </div>
-        
-        <div class="progress-item">
-          <div class="progress-info">
-            <span>Backend Development</span>
-            <span>80%</span>
-          </div>
-          <div class="progress-bar">
-            <div class="progress-fill" data-width="80"></div>
-          </div>
-        </div>
-        
-        <div class="progress-item">
-          <div class="progress-info">
-            <span>Frontend Development</span>
-            <span>75%</span>
-          </div>
-          <div class="progress-bar">
-            <div class="progress-fill" data-width="75"></div>
-          </div>
-        </div>
-        
-        <div class="progress-item">
-          <div class="progress-info">
-            <span>Testing & QA</span>
-            <span>60%</span>
-          </div>
-          <div class="progress-bar">
-            <div class="progress-fill" data-width="60"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+          <div style="min-width:220px">
+            <div style="font-weight:700;color:var(--muted);font-size:15px;margin-bottom:8px">Launch Window</div>
 
-  <!-- FAQ Section -->
-  <section class="faq" id="faq">
-    <div class="container">
-      <h2 class="section-title">Frequently Asked Questions</h2>
-      <div class="faq-container">
-        <div class="faq-item">
-          <div class="faq-question">
-            <span>What is Mantravi?</span>
-            <i class="fas fa-chevron-down faq-toggle"></i>
-          </div>
-          <div class="faq-answer">
-            <p>Mantravi is an innovative technology platform focused on creating secure, user-friendly solutions that connect people and businesses in new ways.</p>
-          </div>
-        </div>
-        
-        <div class="faq-item">
-          <div class="faq-question">
-            <span>When will Mantravi launch?</span>
-            <i class="fas fa-chevron-down faq-toggle"></i>
-          </div>
-          <div class="faq-answer">
-            <p>We're targeting a full launch in the coming months. Stay tuned for updates by subscribing to our newsletter!</p>
-          </div>
-        </div>
-        
-        <div class="faq-item">
-          <div class="faq-question">
-            <span>How can I get early access?</span>
-            <i class="fas fa-chevron-down faq-toggle"></i>
-          </div>
-          <div class="faq-answer">
-            <p>We'll be selecting a limited number of users for our beta testing program. Sign up for our newsletter to be considered for early access.</p>
-          </div>
-        </div>
-        
-        <div class="faq-item">
-          <div class="faq-question">
-            <span>What industries will Mantravi serve?</span>
-            <i class="fas fa-chevron-down faq-toggle"></i>
-          </div>
-          <div class="faq-answer">
-            <p>Our initial focus is on fintech and business services, but our platform is designed to be adaptable across multiple industries.</p>
-          </div>
-        </div>
-        
-        <div class="faq-item">
-          <div class="faq-question">
-            <span>Will there be a mobile app?</span>
-            <i class="fas fa-chevron-down faq-toggle"></i>
-          </div>
-          <div class="faq-answer">
-            <p>Yes! We're developing native mobile applications for both iOS and Android to complement our web platform.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Newsletter Section -->
-  <section class="newsletter">
-    <div class="container">
-      <h2 class="section-title">Stay Updated</h2>
-      <p>Be the first to know when we launch. Subscribe to our newsletter for exclusive updates.</p>
-      <form class="newsletter-form">
-        <input type="email" class="newsletter-input" placeholder="Enter your email address" required>
-        <button type="submit" class="newsletter-btn">Subscribe</button>
-      </form>
-    </div>
-  </section>
-
-  <!-- Contact Section -->
-  <section class="contact" id="contact">
-    <div class="container">
-      <h2 class="section-title">Get In Touch</h2>
-      <div class="contact-container">
-        <div class="contact-info">
-          <h3>Contact Information</h3>
-          <div class="contact-details">
-            <div class="contact-detail">
-              <i class="fas fa-map-marker-alt"></i>
-              <span>123 Innovation Drive, Tech City, TC 10101</span>
+            <!-- Countdown -->
+            <div class="countdown" role="timer" aria-live="polite" aria-atomic="true" id="countdown">
+              <div class="count-item">
+                <div class="count-number" id="days">00</div>
+                <div class="count-label">Days</div>
+              </div>
+              <div class="count-item">
+                <div class="count-number" id="hours">00</div>
+                <div class="count-label">Hours</div>
+              </div>
+              <div class="count-item">
+                <div class="count-number" id="minutes">00</div>
+                <div class="count-label">Minutes</div>
+              </div>
+              <div class="count-item">
+                <div class="count-number" id="seconds">00</div>
+                <div class="count-label">Seconds</div>
+              </div>
             </div>
-            <div class="contact-detail">
-              <i class="fas fa-phone"></i>
-              <span>+1 (555) 123-4567</span>
+
+            <div class="cta" style="margin-top:12px">
+              <button class="notify" id="subscribeBtn" type="button">Notify me at launch</button>
+              <button class="muted-link" id="learnMore" type="button">Why Mantravi?</button>
             </div>
-            <div class="contact-detail">
-              <i class="fas fa-envelope"></i>
-              <span>hello@mantravi.com</span>
+
+            <div class="small" id="supportText">
+              No spam — only launch updates and early access invites.
             </div>
           </div>
-          
-          <h3>Follow Us</h3>
-          <div class="social-links">
-            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
-            <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
-            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-            <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
-          </div>
-        </div>
-        
-        <div class="contact-form">
-          <form>
-            <div class="form-group">
-              <input type="text" class="form-input" placeholder="Your Name" required>
-            </div>
-            <div class="form-group">
-              <input type="email" class="form-input" placeholder="Your Email" required>
-            </div>
-            <div class="form-group">
-              <input type="text" class="form-input" placeholder="Subject">
-            </div>
-            <div class="form-group">
-              <textarea class="form-input" placeholder="Your Message" required></textarea>
-            </div>
-            <button type="submit" class="submit-btn">Send Message</button>
-          </form>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer>
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-column">
-          <h3>Mantravi</h3>
-          <p>Innovating Trust, Connecting Possibilities. We're building the future of technology solutions.</p>
-          <div class="social-links">
-            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
-            <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
-            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-            <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
-          </div>
-        </div>
-        
-        <div class="footer-column">
-          <h3>Quick Links</h3>
-          <ul class="footer-links">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#features">Features</a></li>
-            <li><a href="#team">Team</a></li>
-            <li><a href="#progress">Progress</a></li>
-          </ul>
-        </div>
-        
-        <div class="footer-column">
-          <h3>Resources</h3>
-          <ul class="footer-links">
-            <li><a href="#faq">FAQ</a></li>
-            <li><a href="#contact">Contact</a></li>
-            <li><a href="#">Privacy Policy</a></li>
-            <li><a href="#">Terms of Service</a></li>
-            <li><a href="#">Support</a></li>
-          </ul>
-        </div>
-        
-        <div class="footer-column">
-          <h3>Newsletter</h3>
-          <p>Subscribe to get updates on our launch and product news.</p>
-          <form class="newsletter-form">
-            <input type="email" class="form-input" placeholder="Your email" required>
-            <button type="submit" class="submit-btn" style="width: 100%; margin-top: 10px;">Subscribe</button>
-          </form>
-        </div>
-      </div>
-      
-      <div class="copyright">
-        <p>© <span id="year"></span> Mantravi. All rights reserved.</p>
-      </div>
-    </div>
-  </footer>
-
-  <!-- Back to Top Button -->
-  <a href="#home" class="back-to-top" id="backToTop">
-    <i class="fas fa-chevron-up"></i>
-  </a>
+    </section>
+  </main>
 
   <script>
-    // Set current year in footer
-    document.getElementById("year").textContent = new Date().getFullYear();
-    
-    // Countdown timer (set to 30 days from now)
-    const countdownDate = new Date();
-    countdownDate.setDate(countdownDate.getDate() + 30);
-    
-    function updateCountdown() {
-      const now = new Date().getTime();
-      const distance = countdownDate - now;
-      
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-      
-      document.getElementById("days").textContent = days.toString().padStart(2, '0');
-      document.getElementById("hours").textContent = hours.toString().padStart(2, '0');
-      document.getElementById("minutes").textContent = minutes.toString().padStart(2, '0');
-      document.getElementById("seconds").textContent = seconds.toString().padStart(2, '0');
-      
-      if (distance < 0) {
-        clearInterval(countdownInterval);
-        document.querySelector(".countdown-container").innerHTML = "<h3>We're Live!</h3>";
-      }
-    }
-    
-    // Update countdown every second
-    const countdownInterval = setInterval(updateCountdown, 1000);
-    updateCountdown(); // Initial call
-    
-    // Newsletter form submission
-    document.querySelector('.newsletter-form').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const email = this.querySelector('.newsletter-input').value;
-      alert(`Thank you for subscribing with ${email}! We'll keep you updated.`);
-      this.reset();
-    });
-    
-    // Contact form submission
-    document.querySelector('.contact-form form').addEventListener('submit', function(e) {
-      e.preventDefault();
-      alert('Thank you for your message! We will get back to you soon.');
-      this.reset();
-    });
-    
-    // Mobile menu toggle
-    const hamburger = document.getElementById('hamburger');
-    const navMenu = document.getElementById('nav-menu');
-    
-    hamburger.addEventListener('click', function() {
-      navMenu.classList.toggle('active');
-      hamburger.innerHTML = navMenu.classList.contains('active') ? 
-        '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
-    });
-    
-    // Close mobile menu when clicking on a link
-    document.querySelectorAll('.nav-menu a').forEach(link => {
-      link.addEventListener('click', () => {
-        navMenu.classList.remove('active');
-        hamburger.innerHTML = '<i class="fas fa-bars"></i>';
-      });
-    });
-    
-    // Header scroll effect
-    window.addEventListener('scroll', function() {
-      const header = document.getElementById('header');
-      if (window.scrollY > 50) {
-        header.classList.add('scrolled');
-      } else {
-        header.classList.remove('scrolled');
-      }
-      
-      // Back to top button visibility
-      const backToTop = document.getElementById('backToTop');
-      if (window.scrollY > 300) {
-        backToTop.classList.add('visible');
-      } else {
-        backToTop.classList.remove('visible');
-      }
-    });
-    
-    // FAQ accordion
-    document.querySelectorAll('.faq-question').forEach(question => {
-      question.addEventListener('click', () => {
-        const item = question.parentNode;
-        item.classList.toggle('active');
-      });
-    });
-    
-    // Animate progress bars when they come into view
-    function animateProgressBars() {
-      const progressBars = document.querySelectorAll('.progress-fill');
-      progressBars.forEach(bar => {
-        const width = bar.getAttribute('data-width');
-        bar.style.width = width + '%';
-      });
-    }
-    
-    // Intersection Observer for progress bars
-    const progressSection = document.querySelector('.progress');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          animateProgressBars();
+    // ---------- Countdown: set to exactly 10 days from now ----------
+    (function(){
+      const now = new Date();
+      const target = new Date(now.getTime() + 10 * 24 * 60 * 60 * 1000);
+      // normalize target to same hour/min/sec as now for smoothness
+      target.setMilliseconds(0);
+
+      const dEl = document.getElementById('days');
+      const hEl = document.getElementById('hours');
+      const mEl = document.getElementById('minutes');
+      const sEl = document.getElementById('seconds');
+
+      function tick() {
+        const now = new Date().getTime();
+        const distance = target.getTime() - now;
+
+        if (distance <= 0) {
+          // Launch!
+          dEl.textContent = '00';
+          hEl.textContent = '00';
+          mEl.textContent = '00';
+          sEl.textContent = '00';
+          document.getElementById('countdown').innerHTML = '<div style="font-weight:800;color:var(--primary);font-size:18px">We are live!</div>';
+          clearInterval(interval);
+          return;
         }
+
+        const days = Math.floor(distance / (1000*60*60*24));
+        const hours = Math.floor((distance % (1000*60*60*24)) / (1000*60*60));
+        const minutes = Math.floor((distance % (1000*60*60)) / (1000*60));
+        const seconds = Math.floor((distance % (1000*60)) / 1000);
+
+        dEl.textContent = String(days).padStart(2,'0');
+        hEl.textContent = String(hours).padStart(2,'0');
+        mEl.textContent = String(minutes).padStart(2,'0');
+        sEl.textContent = String(seconds).padStart(2,'0');
+      }
+
+      tick(); // initial
+      const interval = setInterval(tick, 1000);
+    })();
+
+    // ---------- Simple "Notify me" modal-like faux interaction ----------
+    document.getElementById('subscribeBtn').addEventListener('click', function(){
+      const email = prompt('Enter your email to get notified at launch:', '');
+      if (!email) return alert('No email entered — you can subscribe later.');
+      // This is placeholder: replace with your backend integration
+      alert(`Thanks — ${email} will be notified when we launch.`);
+    });
+
+    // ---------- Learn more micro interaction ----------
+    document.getElementById('learnMore').addEventListener('click', function(){
+      alert('Mantravi will focus on secure, human-centered tech for business — stay tuned for details at launch.');
+    });
+
+    // ---------- Little orbital shimmer on click for fun ----------
+    const orb = document.getElementById('orb');
+    orb.addEventListener('click', () => {
+      orb.style.transition = 'transform 360ms cubic-bezier(.2,.9,.2,1)';
+      orb.style.transform = 'scale(1.14) rotate(8deg)';
+      setTimeout(()=> orb.style.transform = '', 420);
+    });
+
+    // Accessibility: reduce motion respect
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (prefersReduced.matches) {
+      document.querySelectorAll('*').forEach(n => {
+        n.style.animation = 'none';
+        n.style.transition = 'none';
       });
-    }, { threshold: 0.5 });
-    
-    observer.observe(progressSection);
+    }
   </script>
 </body>
 </html>
