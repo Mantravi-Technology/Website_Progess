@@ -3,392 +3,265 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Mantravi — Launching Soon</title>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <title>Mantravi — Coming Soon</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700;900&display=swap" rel="stylesheet">
   <style>
     :root{
-      /* company colors preserved */
-      --primary: #00b4d8;       /* main brand color */
-      --primary-2: #0096c7;    /* accent / darker */
-      --bg: #050a30;           /* deep navy background */
+      --primary: #00b4d8;
+      --primary-dark: #0096c7;
+      --bg: #050a30;
       --muted: rgba(255,255,255,0.85);
-      --glass: rgba(255,255,255,0.04);
-      --radius: 16px;
     }
 
-    /* Reset & base */
     *{box-sizing:border-box;margin:0;padding:0}
-    html,body{height:100%}
     body{
-      font-family:'Poppins',system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
-      background: linear-gradient(180deg,var(--bg), #071038 60%);
+      font-family:'Poppins',sans-serif;
+      background:var(--bg);
       color:var(--muted);
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
       display:flex;
-      align-items:center;
       justify-content:center;
-      padding:32px;
-      line-height:1.3;
+      align-items:center;
+      min-height:100vh;
+      overflow-x:hidden;
     }
 
-    /* Container */
-    .wrap{
-      width:100%;
-      max-width:980px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    .container{
+      text-align:center;
+      padding:40px;
       border-radius:20px;
-      padding:44px;
-      box-shadow: 0 10px 40px rgba(2,6,23,0.7);
-      border: 1px solid rgba(0,0,0,0.35);
+      background:rgba(255,255,255,0.02);
+      box-shadow:0 0 40px rgba(0,180,216,0.1);
+      max-width:600px;
+      width:90%;
       position:relative;
-      overflow:hidden;
     }
 
-    /* Subtle branded backdrop shape */
-    .wrap::before{
-      content:"";
-      position:absolute;
-      right:-120px;
-      top:-120px;
-      width:420px;
-      height:420px;
-      background: radial-gradient(circle at 30% 30%, rgba(0,180,216,0.14), transparent 20%),
-                  conic-gradient(from 160deg at 50% 50%, rgba(0,180,216,0.06), transparent 30%);
-      transform: rotate(15deg);
-      filter: blur(22px);
-      pointer-events:none;
-      z-index:0;
+    .logo{
+      width:90px;
+      height:auto;
+      margin-bottom:20px;
     }
 
-    /* Top area with tiny mark */
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:14px;
-      z-index:1;
-      margin-bottom:28px;
-    }
-    .mark{
-      width:54px;height:54px;border-radius:12px;
-      background:linear-gradient(135deg,var(--primary),var(--primary-2));
-      display:grid;place-items:center;
-      box-shadow:0 8px 30px rgba(0,180,216,0.12);
-      flex-shrink:0;
-      font-weight:900;color:#021124;font-size:20px;
-    }
-    .brand h1{font-size:20px;letter-spacing:0.6px;font-weight:700;color:var(--muted)}
-    .brand p{font-size:13px;color:rgba(255,255,255,0.65);margin-top:4px}
-
-    /* Main headline + tagline */
-    .hero{
-      display:flex;
-      gap:28px;
-      align-items:center;
-      z-index:1;
-    }
-    .left{
-      flex:1;
-      min-width:0;
-    }
-
-    .headline{
-      font-size: clamp(22px, 4.2vw, 36px);
+    h1{
+      font-size:2rem;
+      color:white;
       font-weight:800;
-      color: white;
-      margin-bottom:12px;
-      line-height:1.02;
-      letter-spacing:-0.6px;
     }
 
-    .tagline{
-      font-size:16px;
-      color: rgba(255,255,255,0.88);
-      margin-bottom:22px;
+    p{
+      font-size:1rem;
+      margin-top:10px;
+      color:rgba(255,255,255,0.8);
     }
 
-    /* Creative micro copy */
-    .micro{
-      color: rgba(255,255,255,0.6);
-      font-size:13px;
-      margin-bottom:22px;
-    }
-
-    /* Unique loader (SVG + CSS) */
-    .loader-wrap{
-      display:flex;
-      align-items:center;
-      gap:18px;
-    }
-
-    .loader {
-      width:92px;height:92px;border-radius:20px;
-      display:grid;place-items:center;
-      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      border:1px solid rgba(255,255,255,0.04);
-      box-shadow: 0 8px 26px rgba(2,6,23,0.6);
-      position:relative;
-      overflow:visible;
-    }
-
-    /* Animated orb inside loader */
-    .orb {
-      width:54px;height:54px;border-radius:50%;
-      background: radial-gradient(circle at 30% 30%, #eaffff, rgba(255,255,255,0.06));
-      box-shadow: 0 10px 32px rgba(0,180,216,0.18), inset 0 -8px 18px rgba(0,0,0,0.18);
-      transform-origin:center;
-      animation: floaty 2.6s ease-in-out infinite;
+    /* Loader */
+    .loader{
+      width:80px;
+      height:80px;
+      margin:40px auto;
+      border-radius:50%;
+      background:conic-gradient(from 0deg, var(--primary), transparent 60%);
+      animation:spin 2s linear infinite;
+      display:grid;
+      place-items:center;
       position:relative;
     }
-
-    /* halo ring */
-    .orb::after{
+    .loader::after{
       content:"";
-      position:absolute;inset:-8px;border-radius:50%;
-      background: conic-gradient(from 120deg, rgba(0,180,216,0.22), rgba(0,150,199,0.12) 40%, transparent 60%);
-      filter: blur(8px);
-      opacity:0.9;
+      width:40px;
+      height:40px;
+      border-radius:50%;
+      background:var(--bg);
     }
+    @keyframes spin{to{transform:rotate(360deg)}}
 
-    @keyframes floaty {
-      0%{ transform: translateY(0) scale(1);}
-      50%{ transform: translateY(-8px) scale(1.03) rotate(6deg);}
-      100%{ transform: translateY(0) scale(1);}
-    }
-
-    /* Fancy tick marks rotating */
-    .spinner-rings{
-      position:absolute; inset:6px; pointer-events:none;
-      display:grid;place-items:center;
-      transform-origin:center;
-      animation: spinR 8s linear infinite;
-      opacity:0.85;
-    }
-    @keyframes spinR {
-      to{ transform: rotate(360deg); }
-    }
-
-    /* Countdown box */
+    /* Countdown */
     .countdown{
       display:flex;
-      gap:12px;
-      align-items:center;
-      margin-top:8px;
-      flex-wrap:wrap;
+      justify-content:center;
+      gap:15px;
+      margin-top:10px;
     }
-
-    .count-item{
-      min-width:86px;
-      background:var(--glass);
-      padding:12px 12px;
+    .time-box{
+      background:rgba(255,255,255,0.05);
+      padding:10px 14px;
       border-radius:12px;
       text-align:center;
-      border: 1px solid rgba(255,255,255,0.03);
-      box-shadow: 0 6px 18px rgba(1,6,18,0.6);
+      min-width:70px;
     }
-    .count-number{
-      font-weight:800;
+    .time-box span{
+      display:block;
       font-size:20px;
+      font-weight:700;
       color:var(--primary);
-      letter-spacing:0.6px;
     }
-    .count-label{
+    .time-box small{
       font-size:12px;
       color:rgba(255,255,255,0.7);
-      margin-top:6px;
     }
 
-    /* CTA + small footer line */
-    .cta{
-      margin-top:26px;
+    /* Buttons */
+    .btns{
+      margin-top:25px;
       display:flex;
-      gap:12px;
-      align-items:center;
+      justify-content:center;
+      gap:15px;
       flex-wrap:wrap;
     }
-    .notify{
-      background:linear-gradient(90deg,var(--primary),var(--primary-2));
-      color:#021124;
-      padding:11px 18px;
+    button{
+      background:linear-gradient(90deg,var(--primary),var(--primary-dark));
+      color:#fff;
+      padding:10px 20px;
+      border:none;
       border-radius:12px;
+      font-weight:600;
+      cursor:pointer;
+      transition:transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    button:hover{
+      transform:translateY(-2px);
+      box-shadow:0 4px 15px rgba(0,180,216,0.3);
+    }
+
+    /* Popup (modal) */
+    .popup-overlay{
+      position:fixed;
+      top:0;left:0;
+      width:100%;height:100%;
+      background:rgba(0,0,0,0.6);
+      display:none;
+      justify-content:center;
+      align-items:center;
+      backdrop-filter:blur(6px);
+      z-index:999;
+      animation:fadeIn 0.3s ease forwards;
+    }
+    @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+    .popup{
+      background:rgba(10,20,60,0.95);
+      border:1px solid rgba(255,255,255,0.05);
+      border-radius:16px;
+      padding:30px;
+      width:90%;
+      max-width:400px;
+      text-align:center;
+      position:relative;
+      transform:scale(0.9);
+      animation:popupIn 0.35s ease forwards;
+    }
+    @keyframes popupIn{to{transform:scale(1)}}
+
+    .popup h2{
+      color:var(--primary);
       font-weight:700;
-      border:none;
-      cursor:pointer;
-      box-shadow:0 10px 30px rgba(0,180,216,0.12);
+      margin-bottom:10px;
     }
-    .muted-link{
+
+    .popup p{
+      font-size:0.9rem;
+      margin-bottom:20px;
+      color:rgba(255,255,255,0.8);
+    }
+
+    .popup input{
+      width:100%;
+      padding:10px;
+      border-radius:10px;
+      border:none;
+      outline:none;
+      margin-bottom:15px;
+      text-align:center;
+      font-family:'Poppins',sans-serif;
+    }
+
+    .close-btn{
+      position:absolute;
+      top:10px;
+      right:15px;
+      background:none;
+      border:none;
       color:rgba(255,255,255,0.7);
-      font-size:13px;
-      text-decoration:underline;
-      background:transparent;
-      border:none;
+      font-size:20px;
       cursor:pointer;
     }
-
-    .small{
-      margin-top:18px;
-      font-size:12px;
-      color:rgba(255,255,255,0.55);
-    }
-
-    /* Responsive tweaks */
-    @media (max-width:780px){
-      .wrap{padding:28px;border-radius:14px}
-      .hero{flex-direction:column;align-items:flex-start}
-      .loader{width:84px;height:84px}
-    }
+    .close-btn:hover{color:white}
   </style>
 </head>
 <body>
-  <main class="wrap" role="main" aria-labelledby="pageTitle">
-    <header class="brand" aria-hidden="false">
-      <div class="mark" aria-hidden="true">M</div>
-      <div>
-        <h1 id="pageTitle">Mantravi</h1>
-        <p>Innovating Trust — Connecting Possibilities</p>
-      </div>
-    </header>
 
-    <section class="hero" aria-labelledby="launchHeading" role="region">
-      <div class="left">
-        <h2 class="headline" id="launchHeading">
-          We're crafting the future. Get ready for something meaningful.
-        </h2>
+  <div class="container">
+    <img src="logo.png" alt="Mantravi Logo" class="logo" /> 
+    <h1>We’re Building Something Amazing!</h1>
+    <p>Our engineers are crafting the next chapter of innovation. Stay tuned.</p>
 
-        <p class="tagline">
-          A new chapter in smart, trustworthy technology — built with care, rigor, and delight.
-        </p>
+    <div class="loader"></div>
 
-        <p class="micro">
-          Launching in: a focused 10-day sprint. Sign up to be among the first to experience it.
-        </p>
+    <div class="countdown">
+      <div class="time-box"><span id="days">00</span><small>Days</small></div>
+      <div class="time-box"><span id="hours">00</span><small>Hours</small></div>
+      <div class="time-box"><span id="minutes">00</span><small>Minutes</small></div>
+      <div class="time-box"><span id="seconds">00</span><small>Seconds</small></div>
+    </div>
 
-        <div class="loader-wrap" aria-hidden="false">
-          <div class="loader" role="img" aria-label="Loading animation">
-            <div class="orb" id="orb"></div>
+    <div class="btns">
+      <button id="notifyBtn">Notify Me</button>
+      <button id="whyBtn">Why Mantravi?</button>
+    </div>
+  </div>
 
-            <!-- rotating decorative ring marks -->
-            <svg class="spinner-rings" width="200" height="200" viewBox="0 0 200 200" aria-hidden="true">
-              <g transform="translate(100,100)">
-                <g style="opacity:0.85">
-                  <path d="M80 0 A80 80 0 0 1 40 69" stroke="rgba(255,255,255,0.06)" stroke-width="6" fill="none" stroke-linecap="round"/>
-                  <path d="M-80 0 A80 80 0 0 0 -40 -69" stroke="rgba(0,180,216,0.18)" stroke-width="6" fill="none" stroke-linecap="round"/>
-                  <circle cx="64" cy="0" r="3.8" fill="rgba(0,180,216,0.95)"/>
-                  <circle cx="-64" cy="0" r="2.6" fill="rgba(255,255,255,0.6)"/>
-                </g>
-              </g>
-            </svg>
-          </div>
+  <!-- Notify Me Popup -->
+  <div class="popup-overlay" id="notifyPopup">
+    <div class="popup">
+      <button class="close-btn" onclick="closePopup('notifyPopup')">&times;</button>
+      <h2>Stay in the Loop 🚀</h2>
+      <p>Enter your email to get notified when we go live. No spam — promise!</p>
+      <input type="email" placeholder="Enter your email" id="emailInput" />
+      <button onclick="submitEmail()">Submit</button>
+    </div>
+  </div>
 
-          <div style="min-width:220px">
-            <div style="font-weight:700;color:var(--muted);font-size:15px;margin-bottom:8px">Launch Window</div>
-
-            <!-- Countdown -->
-            <div class="countdown" role="timer" aria-live="polite" aria-atomic="true" id="countdown">
-              <div class="count-item">
-                <div class="count-number" id="days">00</div>
-                <div class="count-label">Days</div>
-              </div>
-              <div class="count-item">
-                <div class="count-number" id="hours">00</div>
-                <div class="count-label">Hours</div>
-              </div>
-              <div class="count-item">
-                <div class="count-number" id="minutes">00</div>
-                <div class="count-label">Minutes</div>
-              </div>
-              <div class="count-item">
-                <div class="count-number" id="seconds">00</div>
-                <div class="count-label">Seconds</div>
-              </div>
-            </div>
-
-            <div class="cta" style="margin-top:12px">
-              <button class="notify" id="subscribeBtn" type="button">Notify me at launch</button>
-              <button class="muted-link" id="learnMore" type="button">Why Mantravi?</button>
-            </div>
-
-            <div class="small" id="supportText">
-              No spam — only launch updates and early access invites.
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
+  <!-- Why Mantravi Popup -->
+  <div class="popup-overlay" id="whyPopup">
+    <div class="popup">
+      <button class="close-btn" onclick="closePopup('whyPopup')">&times;</button>
+      <h2>Why Mantravi?</h2>
+      <p>We’re redefining how technology empowers businesses — combining trust, transparency, and innovation.</p>
+      <p>Our vision: <strong>Build Smart. Build Human.</strong></p>
+    </div>
+  </div>
 
   <script>
-    // ---------- Countdown: set to exactly 10 days from now ----------
-    (function(){
-      const now = new Date();
-      const target = new Date(now.getTime() + 10 * 24 * 60 * 60 * 1000);
-      // normalize target to same hour/min/sec as now for smoothness
-      target.setMilliseconds(0);
+    // Countdown
+    const target = new Date().getTime() + 10 * 24 * 60 * 60 * 1000;
+    const updateCountdown = () => {
+      const now = new Date().getTime();
+      const distance = target - now;
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      document.getElementById("days").innerText = days.toString().padStart(2, '0');
+      document.getElementById("hours").innerText = hours.toString().padStart(2, '0');
+      document.getElementById("minutes").innerText = minutes.toString().padStart(2, '0');
+      document.getElementById("seconds").innerText = seconds.toString().padStart(2, '0');
+    };
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
 
-      const dEl = document.getElementById('days');
-      const hEl = document.getElementById('hours');
-      const mEl = document.getElementById('minutes');
-      const sEl = document.getElementById('seconds');
+    // Popup Logic
+    const openPopup = id => document.getElementById(id).style.display = 'flex';
+    const closePopup = id => document.getElementById(id).style.display = 'none';
 
-      function tick() {
-        const now = new Date().getTime();
-        const distance = target.getTime() - now;
+    document.getElementById('notifyBtn').addEventListener('click', () => openPopup('notifyPopup'));
+    document.getElementById('whyBtn').addEventListener('click', () => openPopup('whyPopup'));
 
-        if (distance <= 0) {
-          // Launch!
-          dEl.textContent = '00';
-          hEl.textContent = '00';
-          mEl.textContent = '00';
-          sEl.textContent = '00';
-          document.getElementById('countdown').innerHTML = '<div style="font-weight:800;color:var(--primary);font-size:18px">We are live!</div>';
-          clearInterval(interval);
-          return;
-        }
-
-        const days = Math.floor(distance / (1000*60*60*24));
-        const hours = Math.floor((distance % (1000*60*60*24)) / (1000*60*60));
-        const minutes = Math.floor((distance % (1000*60*60)) / (1000*60));
-        const seconds = Math.floor((distance % (1000*60)) / 1000);
-
-        dEl.textContent = String(days).padStart(2,'0');
-        hEl.textContent = String(hours).padStart(2,'0');
-        mEl.textContent = String(minutes).padStart(2,'0');
-        sEl.textContent = String(seconds).padStart(2,'0');
-      }
-
-      tick(); // initial
-      const interval = setInterval(tick, 1000);
-    })();
-
-    // ---------- Simple "Notify me" modal-like faux interaction ----------
-    document.getElementById('subscribeBtn').addEventListener('click', function(){
-      const email = prompt('Enter your email to get notified at launch:', '');
-      if (!email) return alert('No email entered — you can subscribe later.');
-      // This is placeholder: replace with your backend integration
-      alert(`Thanks — ${email} will be notified when we launch.`);
-    });
-
-    // ---------- Learn more micro interaction ----------
-    document.getElementById('learnMore').addEventListener('click', function(){
-      alert('Mantravi will focus on secure, human-centered tech for business — stay tuned for details at launch.');
-    });
-
-    // ---------- Little orbital shimmer on click for fun ----------
-    const orb = document.getElementById('orb');
-    orb.addEventListener('click', () => {
-      orb.style.transition = 'transform 360ms cubic-bezier(.2,.9,.2,1)';
-      orb.style.transform = 'scale(1.14) rotate(8deg)';
-      setTimeout(()=> orb.style.transform = '', 420);
-    });
-
-    // Accessibility: reduce motion respect
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)');
-    if (prefersReduced.matches) {
-      document.querySelectorAll('*').forEach(n => {
-        n.style.animation = 'none';
-        n.style.transition = 'none';
-      });
+    // Fake submit
+    function submitEmail(){
+      const email = document.getElementById('emailInput').value;
+      if(!email) return alert("Please enter your email!");
+      closePopup('notifyPopup');
+      alert(`Thanks, ${email}! We’ll notify you when we launch 🚀`);
     }
   </script>
 </body>
